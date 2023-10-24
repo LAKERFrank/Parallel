@@ -74,7 +74,7 @@ void clampedExpVector(float *values, int *exponents, float *output, int N)
       allMask = _pp_init_ones(N-i);
     }
     else{
-      allMask = _pp_init_ones(N);
+      allMask = _pp_init_ones();
     }
     _pp_vload_float(x, values + i, allMask);
     _pp_vload_int(y, exponents + i, allMask);
@@ -112,11 +112,30 @@ float arraySumVector(float *values, int N)
   //
   // PP STUDENTS TODO: Implement your vectorized version of arraySumSerial here
   //
-
+  __pp_vec_float x;
+  float sum=0.f; 
+  float temp[VECTOR_WIDTH];
+  __pp_mask allMask;
+  
   for (int i = 0; i < N; i += VECTOR_WIDTH)
   {
-    
+    int len = VECTOR_WIDTH;
+
+    if(i + VECTOR_WIDTH > N){
+      allMask = _pp_init_ones(N-i);
+    }
+    else{
+      allMask = _pp_init_ones();
+    }
+    _pp_vload_float(x,values + i,allMask);//x=values[i] 1234
+    while(len!=1){
+      _pp_hadd_float(x,x);
+      _pp_interleave_float(x,x);
+      len>>=1;
+    }
+    _pp_vstore_float(temp,x,allMask);
+    sum += temp[0];
   }
 
-  return 0.0;
+  return sum;
 }
