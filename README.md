@@ -1,2 +1,2 @@
 # Parallel
-NYCU Parallel homework
+NYCU Parallel Programming 2023
