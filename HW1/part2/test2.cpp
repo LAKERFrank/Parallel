@@ -15,18 +15,19 @@ void test2(float *__restrict a, float *__restrict b, float *__restrict c, int N)
     for (int j = 0; j < N; j++)
     {
       /* max() */
-      // if (b[j] > a[j]) c[j] = b[j];
-      // else c[j] = a[j];
+      if (b[j] > a[j]) c[j] = b[j];
+      else c[j] = a[j];
 
-      c[j] = a[j];
-      if (b[j] > a[j])
-        c[j] = b[j];
+      // c[j] = a[j];
+      // if (b[j] > a[j])
+      //   c[j] = b[j];
     }
   }
 
   fasttime_t time2 = gettime();
 
   double elapsedf = tdiff(time1, time2);
-  std::cout << "Average Elapsed execution time of the loop in test2() for 100 times:\n"
+
+  std::cout << "Elapsed execution time of the loop in test2():\n"
             << elapsedf << "sec (N: " << N << ", I: " << I << ")\n";
 }

@@ -17,7 +17,8 @@ double test3(double* __restrict a, int N) {
   fasttime_t time2 = gettime();
 
   double elapsedf = tdiff(time1, time2);
-  std::cout << "Average Elapsed execution time of the loop in test3() for 100 times:\n" 
+
+  std::cout << "Elapsed execution time of the loop in test3():\n" 
     << elapsedf << "sec (N: " << N << ", I: " << I << ")\n";
 
   return b;
